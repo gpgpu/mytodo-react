@@ -35,4 +35,4 @@ var TodoApp = React.createClass({
 });
 React.render(
   <TodoApp />
-  , document.body);
+  , document.getElementById("todoapp"));

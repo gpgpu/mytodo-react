@@ -3,6 +3,9 @@ var TodoActions = require('../actions/TodoActions');
 var TodoItem = require('./TodoItem');
 
 var MainSection = React.createClass({
+  onToggleCompleteAll: function(){
+    TodoActions.toggleCompleteAll();
+  },
   render: function(){
     if (Object.keys(this.props.allTodos).length < 1){
       return null;
@@ -14,7 +17,10 @@ var MainSection = React.createClass({
     }
     return (
       <section id="main">
-        <ul>{todos}</ul>
+        <input id="toggle-all" type="checkbox" onChange={this.onToggleCompleteAll}
+          checked={this.props.areAllComplete? 'checked' : ''} />
+        <label htmlFor="toggle-all">Mark all as complete</label>
+        <ul id="todo-list">{todos}</ul>
       </section>
     );
   }

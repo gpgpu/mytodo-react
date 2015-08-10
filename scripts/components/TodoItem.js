@@ -9,7 +9,7 @@ var TodoItem = React.createClass({
       isEditing: false
     };
   },
-  onToggleComplete: function(){
+  toggleComplete: function(){
     TodoActions.toggleComplete(this.props.todo);
   },
   onDoubleClick: function(){
@@ -31,9 +31,9 @@ var TodoItem = React.createClass({
     }
 
     return (
-      <li className={classNames({'completed': todo.complete, 'editing': this.state.isEditing})} key={todo.id}>
+      <li id="todo" className={classNames({'completed': todo.complete, 'editing': this.state.isEditing})} key={todo.id}>
         <div className="view">
-          <input className="toggle" type="checkbox" checked={todo.complete} onChange={this.onToggleComplete} />
+          <input className="toggle" type="checkbox" checked={todo.complete} onChange={this.toggleComplete} />
           <label onDoubleClick = {this.onDoubleClick}>{todo.text}</label>
           <button className="destroy" onClick={this.onDestroy} />
         </div>

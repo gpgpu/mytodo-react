@@ -15,6 +15,14 @@ function create(text){
   }
 }
 
+function destroy(id){
+  delete _todos[id];
+}
+
+function update(id, updates){
+  _todos[id] = assign({}, _todos[id], updates);
+}
+
 var TodoStore = assign({}, EventEmitter.prototype, {
   getAll: function(){
     return _todos;
@@ -47,7 +55,19 @@ AppDispatcher.register(function(action){
         create(text);
         TodoStore.emitChange();
       }
-    break;
+      break;
+    case TodoConstants.TODO_DESTROY:
+      destroy(action.id);
+      TodoStore.emitChange();
+      break;
+    case TodoConstants.TODO_COMPLETE:
+      update(action.id, {complete: false});
+      TodoStore.emitChange();
+      break;
+    case TodoConstants.TODO_UNDO_COMPLETE:
+      update(action.id, {complete: true});
+      TodoStore.emitChange();
+      break;
   }
 });
 
